@@ -26,8 +26,8 @@ https://www.archlinux.org/mirrorlist/ to fetch required mirrors every 30 days
 and can optionally sort them by speed using rankmirrors.
 This is all configurable.
 
-This module depends on `puppetlabs/stdlib, >=3.0.0` and `puppetlabs/concat,
->=1.0.0` modules.
+This module depends on `puppetlabs/stdlib, >=3.0.0` and 
+`puppetlabs/concat, >=1.0.0` modules.
 
 Setup
 -----
@@ -167,9 +167,9 @@ Puppet will manage your system's `pacman.conf` file.
 
 #### Parameters
 
-   [*always_refresh*]    - always refresh repositories (pacman -Sy).
+*   [*always_refresh*]    - always refresh repositories (pacman -Sy).
      (true|false)          [default: true]
-   [*pacman_config*]     - set pacman configuration file
+*   [*pacman_config*]     - set pacman configuration file
      (string)              [default: '/etc/pacman.conf']
    [*pacman_config_d*]   - set pacman configuration directory (with trailing /)
      (string)              [default: '/etc/pacman.d/']
