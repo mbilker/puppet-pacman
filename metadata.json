@@ -1,6 +1,6 @@
 {
   "name": "pnd-pacman",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "source": "https://github.com/edvinasme/puppet-pacman",
   "author": "Edvinas Klovas <edvinas@pnd.io>",
   "license": "MIT License",
