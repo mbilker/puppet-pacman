@@ -5,8 +5,7 @@
   "author": "Edvinas Klovas <edvinas@pnd.io>",
   "license": "MIT License",
   "project_page": "https://github.com/edvinasme/puppet-pacman",
-  "summary": "Puppet module for managing Pacman configuration, repositories and
-      mirrorlist. Provides ability to install packages from AUR.",
+  "summary": "Puppet module for managing Pacman configuration, repositories and mirrorlist. Provides ability to install packages from AUR.",
   "operatingsystem_support": [
     {
       "operatingsystem": "Archlinux",

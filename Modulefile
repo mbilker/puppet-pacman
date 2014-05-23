@@ -3,8 +3,7 @@ version '0.9.0'
 source  'https://github.com/edvinasme/puppet-pacman'
 author  'Edvinas Klovas <edvinas@pnd.io>'
 license 'MIT License'
-summary 'Puppet module for managing Pacman configuration, repositories and
-         mirrorlist. Provides ability to install packages from AUR.'
+summary 'Puppet module for managing Pacman configuration, repositories and mirrorlist. Provides ability to install packages from AUR.'
 description 'Pacman and AUR module for Puppet'
 project_page 'https://github.com/edvinasme/puppet-pacman'
 
