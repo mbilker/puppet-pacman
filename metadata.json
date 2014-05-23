@@ -30,8 +30,5 @@
     }
 
   ],
-  "description": "Pacman and AUR module for Puppet",
-  "types": [
-
-  ],
+  "description": "Pacman and AUR module for Puppet"
 }
