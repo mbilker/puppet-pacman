@@ -171,88 +171,88 @@ Puppet will manage your system's `pacman.conf` file.
      (true|false)          [default: true]
 *   [*pacman_config*]     - set pacman configuration file
      (string)              [default: '/etc/pacman.conf']
-   [*pacman_config_d*]   - set pacman configuration directory (with trailing /)
+*   [*pacman_config_d*]   - set pacman configuration directory (with trailing /)
      (string)              [default: '/etc/pacman.d/']
-   [*repositories*]      - lets you define repositories to enable. This lets
+*   [*repositories*]      - lets you define repositories to enable. This lets
      (array)               you add official and custom repositories and specify
                            additional parameters such as SigLevel or Order.
                            Please consult man pacman.conf and README.md.
                            [default: core, extra, community]
-   [*enable_aur*]        - enable management of packages from AUR via
+*   [*enable_aur*]        - enable management of packages from AUR via
      (true|false)          `pacman::aur` definition. This installs `yaourt`
                            by including 'pacman::yaourt' class.
                            [default: false]
-   [*mirrorlist_manage*] - enable management of mirrorlist. Will overwrite
+*   [*mirrorlist_manage*] - enable management of mirrorlist. Will overwrite
      (true|false)          mirrorlist:  https://www.archlinux.org/mirrorlist/
                            [default: false]
-   [*mirrorlist_ipv4*]   - use IPv4 mirrors
+*   [*mirrorlist_ipv4*]   - use IPv4 mirrors
      (true|false)          [default: true]
-   [*mirrorlist_ipv6*]   - use IPv6 mirrors
+*   [*mirrorlist_ipv6*]   - use IPv6 mirrors
      (true|false)          [default: false]
-   [*mirrorlist_http*]   - download http mirrors
+*   [*mirrorlist_http*]   - download http mirrors
      (true|false)          [default: true]
-   [*mirrorlist_https*]  - download https mirrors
+*   [*mirrorlist_https*]  - download https mirrors
      (true|false)          [default: true]
-   [*mirrorlist_rank*]   - when specified, ranks number of mirrors by speed
+*   [*mirrorlist_rank*]   - when specified, ranks number of mirrors by speed
      (number|undef)        using rankmirror package
                            [default: undef]
-   [*mirrorlist_force*]  - when set to true will force mirrorlist update.
+*   [*mirrorlist_force*]  - when set to true will force mirrorlist update.
      (true|false)          Only set this to true temporarily while debugging.
                            [default: false]
-   [*root_dir*]          - overrides location when pacman installs packages
+*   [*root_dir*]          - overrides location when pacman installs packages
      (string|undef)        [default: undef]
-   [*db_path*]           - overrides location of database
+*   [*db_path*]           - overrides location of database
      (string|undef)        [default: undef]
-   [*cache_dir*]         - overrides location of package cache.
+*   [*cache_dir*]         - overrides location of package cache.
      (string|undef)        [default: undef]
-   [*log_file*]          - overrides location for pacman.log file
+*   [*log_file*]          - overrides location for pacman.log file
      (string|undef)        [default: undef]
-   [*gpg_dir*]           - overrides default location for GnuPG configuration
+*   [*gpg_dir*]           - overrides default location for GnuPG configuration
      (string|undef)        files used by pacman.
                            [default: undef]
-   [*disable_keys*]      - disables requirement for all packages to be signed.
+*   [*disable_keys*]      - disables requirement for all packages to be signed.
      (true|false)          [default: false]
-   [*architecture*]      - If set, only allow installation of package of the
+*   [*architecture*]      - If set, only allow installation of package of the
                            given architecture. Defaults to auto if undefined.
      (auto|i686|x86_64)    [default: auto]
-   [*sig_level*]         - set default signature verification level (default).
+*   [*sig_level*]         - set default signature verification level (default).
      (string|undef)        Only works if disable_keys = false.
                            [default: 'Required DatabaseOptional']
-   [*local_sig_level*]   - set default signature verification level (local).
+*   [*local_sig_level*]   - set default signature verification level (local).
      (string|undef)        Only works if disable_keys = false.
                            [default: "Optional"]
-   [*remote_sig_level*]  - set default signature verification level (remote).
+*   [*remote_sig_level*]  - set default signature verification level (remote).
      (string|undef)        Only works if disable_keys = false.
                            [default: undef]
-   [*check_space*]       - performs an approximate check for adequate available
+*   [*check_space*]       - performs an approximate check for adequate available
      (true|false)          disk space before installing packages.
                            [default: true]
-   [*hold_pkg*]          - list of packages to require confirmation before
+*   [*hold_pkg*]          - list of packages to require confirmation before
      (string|undef)        being removed. Separate by space (e.g. 'glibc vim')
                            [default: ['pacman glibc']]
-   [*ignore_pkg*]        - list of packages to prevent from upgrading. Separate
+*   [*ignore_pkg*]        - list of packages to prevent from upgrading. Separate
      (string|undef)        by space (e.g. 'mariadb nginx').
                            Shell-style glob patterns are allowed.
                            [default: undef]
-   [*ignore_group*]      - list of package groups to prevent from upgrading.
+*   [*ignore_group*]      - list of package groups to prevent from upgrading.
      (string|undef)        Separate by space (e.g. 'base base-devel').
                            Shell-style glob patterns are allowed.
                            [default: undef]
-   [*no_upgrade*]        - list of files who should never be updated. Pacman
+*   [*no_upgrade*]        - list of files who should never be updated. Pacman
      (string|undef)        will create a file with .pacnew extension instead.
                            Separated by space (e.g. 'etc/passwd etc/shadow').
                            [default: undef]
-   [*no_extract*]        - list all files which should never be extracted from
+*   [*no_extract*]        - list all files which should never be extracted from
      (string|undef)        package into filesystem.
                            [default: undef]
-   [*xfer_command*]      - if set, an external program will be used to download
+*   [*xfer_command*]      - if set, an external program will be used to download
      (string|undef)        all remote files (see man pacman.conf).
                            [default: undef]
-   [*color*]             - if set, enables colors when pacman is on a tty.
+*   [*color*]             - if set, enables colors when pacman is on a tty.
      (true|false)          [default: true]
-   [*verbose_pkg_lists*] - displays name, version and size of target packages.
+*   [*verbose_pkg_lists*] - displays name, version and size of target packages.
      (true|false)          [default: false]
-   [*total_download*]    - Display download stats of total download, not
+*   [*total_download*]    - Display download stats of total download, not
      (true|false)          current pacakge.
                            [default: true]
 
@@ -278,13 +278,13 @@ DO NOT use strings!
 
 #### Parameters
 
-   [*server*]      - specify server url (e.g. "http://repo.archlinux.fr/$arch")
+*   [*server*]      - specify server url (e.g. "http://repo.archlinux.fr/$arch")
      (string|undef)  You can skip this if you want to enable official
                      repository and use mirrorlist.
                      [default: "mirrorlist"]
-   [*sig_level*]   - specify signature verification level for repository
+*   [*sig_level*]   - specify signature verification level for repository
      (string|undef)  [default: undef]
-   [*order*]       - specify order for repository (see man pacman.conf for more
+*   [*order*]       - specify order for repository (see man pacman.conf for more
      (numeric)       information). Number must be in range of [1..99].
                      [default: 99]
 
@@ -312,7 +312,7 @@ If you later decide you need to remove the package:
 
 #### Parameters
 
-   [*ensure*]          - specify if package should be present or absent
+*   [*ensure*]          - specify if package should be present or absent
      (present|absent)    [default: 'present']
 
 
