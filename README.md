@@ -11,6 +11,7 @@ Provides ability to install packages from AUR (via yaourt).
 
 Supports Arch Linux but should be extendable to any Arch Linux based
 distributions using pacman. Patches are welcome.
+
 =======
 
 Overview
