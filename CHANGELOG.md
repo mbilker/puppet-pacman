@@ -1,3 +1,10 @@
+##2014-05-25 - Release 0.9.3
+
+- pacman::aur add 15 minutes timeout as some aur packages take long time to
+  build.
+- mintor fixes
+- added basic travis-ci configuration (WIP)
+
 ##2014-05-22 - Release 0.9.0
 ###Summary
 
