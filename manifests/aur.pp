@@ -44,6 +44,7 @@ define pacman::aur(
         command   => "/usr/bin/yaourt -S --noconfirm ${name}",
         unless    => "/usr/bin/yaourt -Qk ${name}",
         logoutput => 'on_failure',
+        timeout   => 1800,
       }
     }
     'absent': {
@@ -57,5 +58,6 @@ define pacman::aur(
     default: {
       fail("Pacman::Aur[${name}] ensure parameter must be either 'present' or 'absent'")
     }
+
   }
 }
