@@ -1,5 +1,5 @@
 name    'pnd-pacman'
-version '0.9.1'
+version '0.9.3'
 source  'https://github.com/edvinasme/puppet-pacman'
 author  'Edvinas Klovas <edvinas@pnd.io>'
 license 'MIT License'
