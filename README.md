@@ -52,10 +52,10 @@ and `community` repositories by default.
 To begin using the Pacman module with specific repositories, declare the class:
 
     $repositories = {
-      'core'      => { order => '10', },
-      'extra'     => { order => '20', },
-      'community' => { order => '30', },
-      'multilib'  => { order => '40', },
+      'core'      => { order => 10, },
+      'extra'     => { order => 20, },
+      'community' => { order => 30, },
+      'multilib'  => { order => 40, },
     }
 
     class { 'pacman':
@@ -65,7 +65,7 @@ To begin using the Pacman module with specific repositories, declare the class:
     # You can also add additional repositories:
     pacman::repo { 'repo-ck':
       server => 'http://repo-ck.com/$arch',
-      order  => '50',
+      order  => 50,
     }
 
 If you skip `repositories` parameter, pacman module will define `core`, `extra`
@@ -152,11 +152,11 @@ advised to configure repositories, as by default only `core`, `extra` and
 can specify them when initializing `pacman` class:
 
     $repos = {
-      'core'  => { order => '10' },
-      'extra' => { order => '20' },
-      'community' => { order => '30' },
-      'multilib' => { order => '40' },
-      'archlinuxfr' => { server => 'http://repo.archlinux.fr/$arch', order => '50' },
+      'core'  => { order => 10 },
+      'extra' => { order => 20 },
+      'community' => { order => 30 },
+      'multilib' => { order => 40 },
+      'archlinuxfr' => { server => 'http://repo.archlinux.fr/$arch', order => 50 },
     },
 
     class { 'pacman':

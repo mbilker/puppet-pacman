@@ -265,7 +265,7 @@ class pacman(
   concat::fragment{ "${pacman_config}_header":
     target  => $pacman_config,
     content => template('pacman/pacman.conf.erb'),
-    order   => '01',
+    order   => 01,
     ensure  => 'present',
   }
 
