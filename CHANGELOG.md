@@ -1,3 +1,8 @@
+##2015-07-24 - Release 0.9.4
+
+- Make sure all orders are numeric (integers) and not strings (fix #2)
+- Remove `--asroot` parameter when installing yaourt and package-query
+
 ##2014-05-25 - Release 0.9.3
 
 - pacman::aur add 15 minutes timeout as some aur packages take long time to
