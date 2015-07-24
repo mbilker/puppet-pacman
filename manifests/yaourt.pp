@@ -48,7 +48,7 @@ class pacman::yaourt(
 
   # make sure yaourt install is always correct via pacman -Qk
   exec { 'pacman::yaourt':
-    command   => '/bin/curl -o /tmp/aur.sh aur.sh && /bin/chmod +x /tmp/aur.sh && /tmp/aur.sh -si package-query yaourt --asroot --noconfirm && /bin/rm /tmp/aur.sh',
+    command   => '/bin/curl -o /tmp/aur.sh aur.sh && /bin/chmod +x /tmp/aur.sh && /tmp/aur.sh -si package-query yaourt --noconfirm && /bin/rm /tmp/aur.sh',
     unless    => '/usr/bin/pacman -Qk yaourt',
     require   => Exec['pacman-base-devel'],
     logoutput => 'on_failure',
