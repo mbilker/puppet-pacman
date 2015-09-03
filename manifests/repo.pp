@@ -41,10 +41,10 @@
 define pacman::repo(
   $server          = 'mirrorlist',
   $sig_level       = undef,
-  $order           = 99,
-  $pacman_config   = $pacman::params::pacman_config,
-  $pacman_config_d = $pacman::params::pacman_config_d,
+  $order           = 99
 ) {
+  include pacman::params
+
   # valiation
   validate_string($server)
   if $sig_level != undef {
@@ -55,9 +55,10 @@ define pacman::repo(
   }
 
   $repo = $name
+  $pacman_config_d = $pacman::params::pacman_config_d
 
-  concat::fragment{ "${pacman_config}_repo_${repo}":
-    target  => $pacman_config,
+  concat::fragment{ "${pacman::params::pacman_config}_repo_${repo}":
+    target  => $pacman::params::pacman_config,
     content => template('pacman/pacman.conf.repo.erb'),
     order   => $order,
   }

@@ -35,7 +35,9 @@
 #
 define pacman::aur(
   $ensure = 'present',
-) inherits pacman {
+) {
+  include pacman
+  include pacman::yaourt
 
   case $ensure {
     'present': {
