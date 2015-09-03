@@ -30,8 +30,7 @@
 #
 #       pacman::aur { 'cowsay-futurama': }
 #
-class pacman::yaourt(
-) {
+class pacman::yaourt {
   package { 'curl':
     ensure => 'present',
   }
@@ -40,16 +39,18 @@ class pacman::yaourt(
   }
 
   exec { 'pacman-base-devel':
-    command   => '/usr/bin/pacman -S base-devel --needed --noconfirm',
-    unless    => '/usr/bin/pacman -Qk yaourt',
-    require   => [Package['curl'], Package['bc']],
-    logoutput => 'on_failure',
+    command     => '/usr/bin/pacman -S base-devel --needed --noconfirm',
+    unless      => '/usr/bin/pacman -Qk yaourt',
+    require     => [Package['curl'], Package['bc']],
+    logoutput   => 'on_failure',
   }
 
   # make sure yaourt install is always correct via pacman -Qk
   exec { 'pacman::yaourt':
     command   => '/bin/curl -o /tmp/aur.sh aur.sh && /bin/chmod +x /tmp/aur.sh && /tmp/aur.sh -si package-query yaourt --noconfirm && /bin/rm /tmp/aur.sh',
     unless    => '/usr/bin/pacman -Qk yaourt',
+    user      => $yaourt_exec_user,
+    
     require   => Exec['pacman-base-devel'],
     logoutput => 'on_failure',
   }

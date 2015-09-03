@@ -123,6 +123,9 @@ class pacman(
   $pacman_config_d    = $pacman::params::pacman_config_d,
   $repositories       = $pacman::params::repositories,
   $enable_aur         = $pacman::params::enable_aur,
+  $yaourt_exec_user   = $pacman::params::yaourt_exec_user,
+  $yaourt_exec_home   = $pacman::params::yaourt_exec_home,
+  $yaourt_exec_cwd    = $pacman::params::yaourt_exec_cwd,
   $mirrorlist_manage  = $pacman::params::mirrorlist_manage,
   $mirrorlist_ipv4    = $pacman::params::mirrorlist_ipv4,
   $mirrorlist_ipv6    = $pacman::params::mirrorlist_ipv6,
@@ -160,7 +163,8 @@ class pacman(
     $use_syslog, $color, $verbose_pkg_lists, $total_download,
     $mirrorlist_manage, $mirrorlist_ipv6, $mirrorlist_https)
   validate_hash($repositories)
-  validate_string($pacman_config, $pacman_config_d)
+  validate_string($pacman_config, $pacman_config_d, $yaourt_exec_user,
+    $yaourt_exec_home, $yaourt_exec_cwd)
 
   if $mirrorlist_rank != false {
     if !is_numeric($mirrorlist_rank) {

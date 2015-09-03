@@ -35,16 +35,19 @@
 #
 define pacman::aur(
   $ensure = 'present',
-) {
+) inherits pacman {
 
   case $ensure {
     'present': {
       exec { "pacman::aur::install::${name}":
-        require   => Class[pacman::yaourt],
-        command   => "/usr/bin/yaourt -S --noconfirm ${name}",
-        unless    => "/usr/bin/yaourt -Qk ${name}",
-        logoutput => 'on_failure',
-        timeout   => 1800,
+        require     => Class[pacman::yaourt],
+        command     => "/usr/bin/yaourt -S --noconfirm ${name}",
+        unless      => "/usr/bin/yaourt -Qk ${name}",
+        user        => $pacman::yaourt_exec_user,
+        cwd         => $pacman::yaourt_exec_cwd,
+        environment => "HOME=${pacman::yaourt_exec_home}",
+        logoutput   => 'on_failure',
+        timeout     => 1800,
       }
     }
     'absent': {

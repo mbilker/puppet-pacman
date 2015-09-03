@@ -53,7 +53,10 @@ class pacman::params {
       }
 
       # aur
-      $enable_aur   = false
+      $enable_aur       = false
+      $yaourt_exec_user = 'root'
+      $yaourt_exec_home = '/root'
+      $yaourt_exec_cwd  = '/tmp'
 
       # mirrorlist
       $mirrorlist_manage  = false
