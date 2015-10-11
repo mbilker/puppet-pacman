@@ -4,14 +4,14 @@
 # packages from AUR. This class should not be called directly but initialized
 # via init.pp (pacman class) instead.
 #
-# This depends on http://aur.sh webservice script to install `yaourt`
+# This depends on http://meta.sh/aur webservice script to install `yaourt`
 #
 ## If you decide to use this class separately, make sure you set
 # $enable_aur parameter in pacman class to false (or skip pacman class)
 #
 # Dependencies:
 #   curl package (pacman already depends on it)
-#   http://aur.sh webservice
+#   http://meta.sh/aur webservice
 #
 # Usage:
 #
@@ -47,8 +47,10 @@ class pacman::yaourt {
 
   # make sure yaourt install is always correct via pacman -Qk
   exec { 'pacman::yaourt':
-    command   => '/bin/curl -o /tmp/aur.sh aur.sh && /bin/chmod +x /tmp/aur.sh && /tmp/aur.sh -si package-query yaourt --noconfirm && /bin/rm /tmp/aur.sh',
+    command   => '/bin/curl -o /tmp/aur.sh https://meta.sh/aur && /bin/chmod +x /tmp/aur.sh && /tmp/aur.sh -si package-query yaourt --noconfirm && /bin/rm /tmp/aur.sh',
     unless    => '/usr/bin/pacman -Qk yaourt',
+    user      => $pacman::yaourt_exec_user,
+    cwd       => $pacman::yaourt_exec_cwd,
     require   => Exec['pacman-base-devel'],
     logoutput => 'on_failure',
   }
