@@ -1,8 +1,7 @@
 pacman
 ======
 
-[![Build
-Status](https://travis-ci.org/edvinasme/puppet-pacman.png?branch=master)](https://travis-ci.org/edvinasme/puppet-pacman)
+[![BuildStatus](https://travis-ci.org/mbilker/puppet-pacman.png?branch=master)](https://travis-ci.org/mbilker/puppet-pacman)
 
 ## Description
 
