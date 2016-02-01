@@ -9,94 +9,97 @@
 # not use CamelCase. For more in-depth explanation of what parameters do, please
 # consult `man pacman.conf` on your Arch Linux system.
 #
-#   [*always_refresh*]    - always refresh repositories (pacman -Sy).
-#     (true|false)          [default: true]
-#   [*pacman_config*]     - set pacman configuration file
-#     (string)              [default: '/etc/pacman.conf']
-#   [*pacman_config_d*]   - set pacman configuration directory (with trailing /)
-#     (string)              [default: '/etc/pacman.d/']
-#   [*repositories*]      - lets you define repositories to enable. This lets
-#     (array)               you add official and custom repositories and specify
-#                           additional parameters such as SigLevel or Order.
-#                           Please consult man pacman.conf and README.md.
-#                           [default: core, extra, community]
-#   [*enable_aur*]        - enable management of packages from AUR via
-#     (true|false)          `pacman::aur` definition. This installs `yaourt`
-#                           by including 'pacman::yaourt' class.
-#                           [default: false]
-#   [*mirrorlist_manage*] - enable management of mirrorlist. Will overwrite
-#     (true|false)          mirrorlist:  https://www.archlinux.org/mirrorlist/
-#                           [default: false]
-#   [*mirrorlist_ipv4*]   - use IPv4 mirrors
-#     (true|false)          [default: true]
-#   [*mirrorlist_ipv6*]   - use IPv6 mirrors
-#     (true|false)          [default: false]
-#   [*mirrorlist_http*]   - download http mirrors
-#     (true|false)          [default: true]
-#   [*mirrorlist_https*]  - download https mirrors
-#     (true|false)          [default: true]
-#   [*mirrorlist_rank*]   - when specified, ranks number of mirrors by speed
-#     (number|undef)        using rankmirror package
-#                           [default: undef]
-#   [*mirrorlist_force*]  - when set to true will force mirrorlist update.
-#     (true|false)          Only set this to true temporarily while debugging.
-#                           [default: false]
-#   [*root_dir*]          - overrides location when pacman installs packages
-#     (string|undef)        [default: undef]
-#   [*db_path*]           - overrides location of database
-#     (string|undef)        [default: undef]
-#   [*cache_dir*]         - overrides location of package cache.
-#     (string|undef)        [default: undef]
-#   [*log_file*]          - overrides location for pacman.log file
-#     (string|undef)        [default: undef]
-#   [*gpg_dir*]           - overrides default location for GnuPG configuration
-#     (string|undef)        files used by pacman.
-#                           [default: undef]
-#   [*disable_keys*]      - disables requirement for all packages to be signed.
-#     (true|false)          [default: false]
-#   [*architecture*]      - If set, only allow installation of package of the
-#                           given architecture. Defaults to auto if undefined.
-#     (auto|i686|x86_64)    [default: auto]
-#   [*sig_level*]         - set default signature verification level (default).
-#     (string|undef)        Only works if disable_keys = false.
-#                           [default: 'Required DatabaseOptional']
-#   [*local_sig_level*]   - set default signature verification level (local).
-#     (string|undef)        Only works if disable_keys = false.
-#                           [default: "Optional"]
-#   [*remote_sig_level*]  - set default signature verification level (remote).
-#     (string|undef)        Only works if disable_keys = false.
-#                           [default: undef]
-#   [*check_space*]       - performs an approximate check for adequate available
-#     (true|false)          disk space before installing packages.
-#                           [default: true]
-#   [*hold_pkg*]          - list of packages to require confirmation before
-#     (string|undef)        being removed. Separate by space (e.g. 'glibc vim')
-#                           [default: ['pacman glibc']]
-#   [*ignore_pkg*]        - list of packages to prevent from upgrading. Separate
-#     (string|undef)        by space (e.g. 'mariadb nginx').
-#                           Shell-style glob patterns are allowed.
-#                           [default: undef]
-#   [*ignore_group*]      - list of package groups to prevent from upgrading.
-#     (string|undef)        Separate by space (e.g. 'base base-devel').
-#                           Shell-style glob patterns are allowed.
-#                           [default: undef]
-#   [*no_upgrade*]        - list of files who should never be updated. Pacman
-#     (string|undef)        will create a file with .pacnew extension instead.
-#                           Separated by space (e.g. 'etc/passwd etc/shadow').
-#                           [default: undef]
-#   [*no_extract*]        - list all files which should never be extracted from
-#     (string|undef)        package into filesystem.
-#                           [default: undef]
-#   [*xfer_command*]      - if set, an external program will be used to download
-#     (string|undef)        all remote files (see man pacman.conf).
-#                           [default: undef]
-#   [*color*]             - if set, enables colors when pacman is on a tty.
-#     (true|false)          [default: true]
-#   [*verbose_pkg_lists*] - displays name, version and size of target packages.
-#     (true|false)          [default: false]
-#   [*total_download*]    - Display download stats of total download, not
-#     (true|false)          current pacakge.
-#                           [default: true]
+#   [*always_refresh*]        - always refresh repositories (pacman -Sy).
+#     (true|false)              [default: true]
+#   [*pacman_config*]         - set pacman configuration file
+#     (string)                  [default: '/etc/pacman.conf']
+#   [*pacman_config_d*]       - set pacman configuration directory (with trailing /)
+#     (string)                  [default: '/etc/pacman.d/']
+#   [*repositories*]          - lets you define repositories to enable. This lets
+#     (array)                   you add official and custom repositories and specify
+#                               additional parameters such as SigLevel or Order.
+#                               Please consult man pacman.conf and README.md.
+#                               [default: core, extra, community]
+#   [*enable_aur*]            - enable management of packages from AUR via
+#     (true|false)              `pacman::aur` definition. This installs `yaourt`
+#                               by including 'pacman::yaourt' class.
+#                               [default: false]
+#   [*yaourt_install_method*] - install yaourt from packages (not available in
+#     (string)                  default repos), or with exec.
+#                               [default: exec]
+#   [*mirrorlist_manage*]     - enable management of mirrorlist. Will overwrite
+#     (true|false)              mirrorlist:  https://www.archlinux.org/mirrorlist/
+#                               [default: false]
+#   [*mirrorlist_ipv4*]       - use IPv4 mirrors
+#     (true|false)              [default: true]
+#   [*mirrorlist_ipv6*]       - use IPv6 mirrors
+#     (true|false)              [default: false]
+#   [*mirrorlist_http*]       - download http mirrors
+#     (true|false)              [default: true]
+#   [*mirrorlist_https*]      - download https mirrors
+#     (true|false)              [default: true]
+#   [*mirrorlist_rank*]       - when specified, ranks number of mirrors by speed
+#     (number|undef)            using rankmirror package
+#                               [default: undef]
+#   [*mirrorlist_force*]      - when set to true will force mirrorlist update.
+#     (true|false)              Only set this to true temporarily while debugging.
+#                               [default: false]
+#   [*root_dir*]              - overrides location when pacman installs packages
+#     (string|undef)            [default: undef]
+#   [*db_path*]               - overrides location of database
+#     (string|undef)            [default: undef]
+#   [*cache_dir*]             - overrides location of package cache.
+#     (string|undef)            [default: undef]
+#   [*log_file*]              - overrides location for pacman.log file
+#     (string|undef)            [default: undef]
+#   [*gpg_dir*]               - overrides default location for GnuPG configuration
+#     (string|undef)            files used by pacman.
+#                               [default: undef]
+#   [*disable_keys*]          - disables requirement for all packages to be signed.
+#     (true|false)              [default: false]
+#   [*architecture*]          - If set, only allow installation of package of the
+#                               given architecture. Defaults to auto if undefined.
+#     (auto|i686|x86_64)        [default: auto]
+#   [*sig_level*]             - set default signature verification level (default).
+#     (string|undef)            Only works if disable_keys = false.
+#                               [default: 'Required DatabaseOptional']
+#   [*local_sig_level*]       - set default signature verification level (local).
+#     (string|undef)            Only works if disable_keys = false.
+#                               [default: "Optional"]
+#   [*remote_sig_level*]      - set default signature verification level (remote).
+#     (string|undef)            Only works if disable_keys = false.
+#                               [default: undef]
+#   [*check_space*]           - performs an approximate check for adequate available
+#     (true|false)              disk space before installing packages.
+#                               [default: true]
+#   [*hold_pkg*]              - list of packages to require confirmation before
+#     (string|undef)            being removed. Separate by space (e.g. 'glibc vim')
+#                               [default: ['pacman glibc']]
+#   [*ignore_pkg*]            - list of packages to prevent from upgrading. Separate
+#     (string|undef)            by space (e.g. 'mariadb nginx').
+#                               Shell-style glob patterns are allowed.
+#                               [default: undef]
+#   [*ignore_group*]          - list of package groups to prevent from upgrading.
+#     (string|undef)            Separate by space (e.g. 'base base-devel').
+#                               Shell-style glob patterns are allowed.
+#                               [default: undef]
+#   [*no_upgrade*]            - list of files who should never be updated. Pacman
+#     (string|undef)            will create a file with .pacnew extension instead.
+#                               Separated by space (e.g. 'etc/passwd etc/shadow').
+#                               [default: undef]
+#   [*no_extract*]            - list all files which should never be extracted from
+#     (string|undef)            package into filesystem.
+#                               [default: undef]
+#   [*xfer_command*]          - if set, an external program will be used to download
+#     (string|undef)            all remote files (see man pacman.conf).
+#                               [default: undef]
+#   [*color*]                 - if set, enables colors when pacman is on a tty.
+#     (true|false)              [default: true]
+#   [*verbose_pkg_lists*]     - displays name, version and size of target packages.
+#     (true|false)              [default: false]
+#   [*total_download*]        - Display download stats of total download, not
+#     (true|false)              current pacakge.
+#                               [default: true]
 #
 # Actions:
 #
@@ -118,44 +121,45 @@
 #  See README.md and tests directory for more examples and information
 #
 class pacman(
-  $always_refresh     = $pacman::params::always_refresh,
-  $pacman_config      = $pacman::params::pacman_config,
-  $pacman_config_d    = $pacman::params::pacman_config_d,
-  $repositories       = $pacman::params::repositories,
-  $enable_aur         = $pacman::params::enable_aur,
-  $yaourt_exec_user   = $pacman::params::yaourt_exec_user,
-  $yaourt_exec_home   = $pacman::params::yaourt_exec_home,
-  $yaourt_exec_cwd    = $pacman::params::yaourt_exec_cwd,
-  $mirrorlist_manage  = $pacman::params::mirrorlist_manage,
-  $mirrorlist_ipv4    = $pacman::params::mirrorlist_ipv4,
-  $mirrorlist_ipv6    = $pacman::params::mirrorlist_ipv6,
-  $mirrorlist_http    = $pacman::params::mirrorlist_http,
-  $mirrorlist_https   = $pacman::params::mirrorlist_https,
-  $mirrorlist_rank    = $pacman::params::mirrorlist_rank,
-  $mirrorlist_force   = $pacman::params::mirrorlist_force,
-  $root_dir           = $pacman::params::root_dir,
-  $db_path            = $pacman::params::db_path,
-  $cache_dir          = $pacman::params::cache_dir,
-  $log_file           = $pacman::params::log_file,
-  $gpg_dir            = $pacman::params::gpg_dir,
-  $disable_keys       = $pacman::params::disable_keys,
-  $architecture       = $pacman::params::architecture,
-  $sig_level          = $pacman::params::sig_level,
-  $local_sig_level    = $pacman::params::local_sig_level,
-  $remote_sig_level   = $pacman::params::remote_sig_level,
-  $check_space        = $pacman::params::check_space,
-  $hold_pkg           = $pacman::params::hold_pkg,
-  $ignore_pkg         = $pacman::params::ignore_pkg,
-  $ignore_group       = $pacman::params::ignore_group,
-  $no_upgrade         = $pacman::params::no_upgrade,
-  $no_extract         = $pacman::params::no_extract,
-  $xfer_command       = $pacman::params::xfer_command,
-  $clean_method       = $pacman::params::clean_method,
-  $use_delta          = $pacman::params::use_delta,
-  $use_syslog         = $pacman::params::use_syslog,
-  $color              = $pacman::params::color,
-  $verbose_pkg_lists  = $pacman::params::verbose_pkg_lists,
-  $total_download     = $pacman::params::total_download,
+  $always_refresh        = $pacman::params::always_refresh,
+  $pacman_config         = $pacman::params::pacman_config,
+  $pacman_config_d       = $pacman::params::pacman_config_d,
+  $repositories          = $pacman::params::repositories,
+  $enable_aur            = $pacman::params::enable_aur,
+  $yaourt_exec_user      = $pacman::params::yaourt_exec_user,
+  $yaourt_exec_home      = $pacman::params::yaourt_exec_home,
+  $yaourt_exec_cwd       = $pacman::params::yaourt_exec_cwd,
+  $yaourt_install_method = $pacman::params::yaourt_install_method,
+  $mirrorlist_manage     = $pacman::params::mirrorlist_manage,
+  $mirrorlist_ipv4       = $pacman::params::mirrorlist_ipv4,
+  $mirrorlist_ipv6       = $pacman::params::mirrorlist_ipv6,
+  $mirrorlist_http       = $pacman::params::mirrorlist_http,
+  $mirrorlist_https      = $pacman::params::mirrorlist_https,
+  $mirrorlist_rank       = $pacman::params::mirrorlist_rank,
+  $mirrorlist_force      = $pacman::params::mirrorlist_force,
+  $root_dir              = $pacman::params::root_dir,
+  $db_path               = $pacman::params::db_path,
+  $cache_dir             = $pacman::params::cache_dir,
+  $log_file              = $pacman::params::log_file,
+  $gpg_dir               = $pacman::params::gpg_dir,
+  $disable_keys          = $pacman::params::disable_keys,
+  $architecture          = $pacman::params::architecture,
+  $sig_level             = $pacman::params::sig_level,
+  $local_sig_level       = $pacman::params::local_sig_level,
+  $remote_sig_level      = $pacman::params::remote_sig_level,
+  $check_space           = $pacman::params::check_space,
+  $hold_pkg              = $pacman::params::hold_pkg,
+  $ignore_pkg            = $pacman::params::ignore_pkg,
+  $ignore_group          = $pacman::params::ignore_group,
+  $no_upgrade            = $pacman::params::no_upgrade,
+  $no_extract            = $pacman::params::no_extract,
+  $xfer_command          = $pacman::params::xfer_command,
+  $clean_method          = $pacman::params::clean_method,
+  $use_delta             = $pacman::params::use_delta,
+  $use_syslog            = $pacman::params::use_syslog,
+  $color                 = $pacman::params::color,
+  $verbose_pkg_lists     = $pacman::params::verbose_pkg_lists,
+  $total_download        = $pacman::params::total_download,
 ) inherits pacman::params {
 
   # validate parameter types
@@ -164,7 +168,7 @@ class pacman(
     $mirrorlist_manage, $mirrorlist_ipv6, $mirrorlist_https)
   validate_hash($repositories)
   validate_string($pacman_config, $pacman_config_d, $yaourt_exec_user,
-    $yaourt_exec_home, $yaourt_exec_cwd)
+    $yaourt_exec_home, $yaourt_exec_cwd, $yaourt_install_method)
 
   if $mirrorlist_rank != false {
     if !is_numeric($mirrorlist_rank) {

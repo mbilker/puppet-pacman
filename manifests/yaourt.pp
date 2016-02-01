@@ -30,28 +30,34 @@
 #
 #       pacman::aur { 'cowsay-futurama': }
 #
-class pacman::yaourt {
-  package { 'curl':
-    ensure => 'present',
-  }
-  package { 'bc':
-    ensure => 'present',
-  }
-
-  exec { 'pacman-base-devel':
-    command   => '/usr/bin/pacman -S base-devel --needed --noconfirm',
-    unless    => '/usr/bin/pacman -Qk yaourt',
-    require   => [Package['curl'], Package['bc']],
-    logoutput => 'on_failure',
-  }
-
-  # make sure yaourt install is always correct via pacman -Qk
-  exec { 'pacman::yaourt':
-    command   => '/bin/curl -o /tmp/aur.sh https://meta.sh/aur && /bin/chmod +x /tmp/aur.sh && /tmp/aur.sh -si package-query yaourt --noconfirm && /bin/rm /tmp/aur.sh',
-    unless    => '/usr/bin/pacman -Qk yaourt',
-    user      => $pacman::yaourt_exec_user,
-    cwd       => $pacman::yaourt_exec_cwd,
-    require   => Exec['pacman-base-devel'],
-    logoutput => 'on_failure',
+class pacman::yaourt inherits ::pacman {
+  if $yaourt_install_method == 'package' {
+    package{'yaourt':
+      ensure => 'present',
+    }
+  } else {
+    package { 'curl':
+      ensure => 'present',
+    }
+    package { 'bc':
+      ensure => 'present',
+    }
+  
+    exec { 'pacman-base-devel':
+      command   => '/usr/bin/pacman -S base-devel --needed --noconfirm',
+      unless    => '/usr/bin/pacman -Qk yaourt',
+      require   => [Package['curl'], Package['bc']],
+      logoutput => 'on_failure',
+    }
+  
+    # make sure yaourt install is always correct via pacman -Qk
+    exec { 'pacman::yaourt':
+      command   => '/bin/curl -o /tmp/aur.sh https://meta.sh/aur && /bin/chmod +x /tmp/aur.sh && /tmp/aur.sh -si package-query yaourt --noconfirm && /bin/rm /tmp/aur.sh',
+      unless    => '/usr/bin/pacman -Qk yaourt',
+      user      => $pacman::yaourt_exec_user,
+      cwd       => $pacman::yaourt_exec_cwd,
+      require   => Exec['pacman-base-devel'],
+      logoutput => 'on_failure',
+    }
   }
 }
