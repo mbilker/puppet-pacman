@@ -50,24 +50,24 @@ and `community` repositories by default.
 #### Repositories
 
 To begin using the Pacman module with specific repositories, declare the class:
+```puppet
+$repositories = {
+  'core'      => { order => 10, },
+  'extra'     => { order => 20, },
+  'community' => { order => 30, },
+  'multilib'  => { order => 40, },
+}
 
-    $repositories = {
-      'core'      => { order => 10, },
-      'extra'     => { order => 20, },
-      'community' => { order => 30, },
-      'multilib'  => { order => 40, },
-    }
+class { 'pacman':
+  repositories => $repositories,
+}
 
-    class { 'pacman':
-      repositories => $repositories,
-    }
-
-    # You can also add additional repositories:
-    pacman::repo { 'repo-ck':
-      server => 'http://repo-ck.com/$arch',
-      order  => 50,
-    }
-
+# You can also add additional repositories:
+pacman::repo { 'repo-ck':
+  server => 'http://repo-ck.com/$arch',
+  order  => 50,
+}
+```
 If you skip `repositories` parameter, pacman module will define `core`, `extra`
 and `community` repositories by default. The examples above will skip definition
 of repositories and let pacman define default ones instead.
@@ -76,26 +76,26 @@ of repositories and let pacman define default ones instead.
 
 Pacman module can manage your mirrorlist. You can enable it via
 `mirrorlist_manage` parameter:
-
-    class { 'pacman':
-      mirrorlist_manage => true,
-    }
-
+```puppet
+class { 'pacman':
+  mirrorlist_manage => true,
+}
+```
 This will enable all IPv4 http and https based mirrors. It will install
 `/usr/local/bin/mirrorlist_check.sh` script on your system which it will use to
 check if mirrorlist is 30 days old to redownload it.
 
 If you want to specify mirrors you want to use, you can pass additional
 parameters. This will fetch IPv4 https-only mirrors:
-
-    class { 'pacman':
-      mirrorlist_manage => true,
-      mirrorlist_ipv4   => true,
-      mirrorlist_ipv6   => false,
-      mirrorlist_http   => false,
-      mirrorlist_https  => true,
-    }
-
+```puppet
+class { 'pacman':
+  mirrorlist_manage => true,
+  mirrorlist_ipv4   => true,
+  mirrorlist_ipv6   => false,
+  mirrorlist_http   => false,
+  mirrorlist_https  => true,
+}
+```
 #### Ranked Mirrorlist
 
 Pacman module can use `rankmirrors` to rank specified amount of mirrors from
@@ -103,35 +103,35 @@ downloaded mirrorlist. This is controlled by `mirrorlist_rank` parameter which
 can be either set to `false` or numeric value of mirrors to rank.
 
 This will fetch IPv4 https-only mirrors and only use 4 ranked by speed:
-
-    class { 'pacman':
-      mirrorlist_manage => true,
-      mirrorlist_ipv4   => true,
-      mirrorlist_ipv6   => false,
-      mirrorlist_http   => false,
-      mirrorlist_https  => true,
-      mirrorlist_rank   => true,
-    }
-
+```puppet
+class { 'pacman':
+  mirrorlist_manage => true,
+  mirrorlist_ipv4   => true,
+  mirrorlist_ipv6   => false,
+  mirrorlist_http   => false,
+  mirrorlist_https  => true,
+  mirrorlist_rank   => true,
+}
+```
 #### AUR
 
 Puppet module support installing packages from AUR. This is accomplished by
 installing `yaourt` on your system. To enable AUR functionality you need to set
 `enable_aur` parameter to true. Then you can use `pacman::aur` definitions to
 install various packages from AUR:
+```puppet
+class { 'pacman':
+  enable_aur => true,
+}
 
-    class { 'pacman':
-      enable_aur => true,
-    }
+# Install Package
+pacman::aur { 'cowsay-futurama': }
 
-    # Install Package
-    pacman::aur { 'cowsay-futurama': }
-
-    # Uninstall Package
-    pacman::aur { 'cowsay-futurama':
-      ensure => 'absent',
-    }
-
+# Uninstall Package
+pacman::aur { 'cowsay-futurama':
+  ensure => 'absent',
+}
+```
 
 Usage
 -----
@@ -150,19 +150,19 @@ mimic default configuration of pacman on Arch Linux system. You are STRONGLY
 advised to configure repositories, as by default only `core`, `extra` and
 `community` repositories will be enabled. To override default repositories, you
 can specify them when initializing `pacman` class:
+```puppet
+$repos = {
+  'core'  => { order => 10 },
+  'extra' => { order => 20 },
+  'community' => { order => 30 },
+  'multilib' => { order => 40 },
+  'archlinuxfr' => { server => 'http://repo.archlinux.fr/$arch', order => 50 },
+},
 
-    $repos = {
-      'core'  => { order => 10 },
-      'extra' => { order => 20 },
-      'community' => { order => 30 },
-      'multilib' => { order => 40 },
-      'archlinuxfr' => { server => 'http://repo.archlinux.fr/$arch', order => 50 },
-    },
-
-    class { 'pacman':
-      repositories         => $repos,
-    }
-
+class { 'pacman':
+  repositories         => $repos,
+}
+```
 Puppet will manage your system's `pacman.conf` file.
 
 #### Parameters
@@ -263,19 +263,19 @@ initialized, you can use `pacman::repo` definition. It is important to define
 order correctly, as pacman uses it when deciding from which repository to
 install a package based on order. Please use integeres between 10 and 99.
 DO NOT use strings!
+```puppet
+class { 'pacman': }
 
-    class { 'pacman': }
+pacman::repo { 'archlinuxfr':
+    server      => 'http://repo.archlinux.fr/$arch',
+    order       => 80,
+}
 
-    pacman::repo { 'archlinuxfr':
-        server      => 'http://repo.archlinux.fr/$arch',
-        order       => 80,
-    }
-
-    pacman::repo { 'repo-ck':
-        server      => 'http://repo-ck.com/$arch',
-        order       => 90,
-    }
-
+pacman::repo { 'repo-ck':
+    server      => 'http://repo-ck.com/$arch',
+    order       => 90,
+}
+```
 #### Parameters
 
 *   [*server*]      - specify server url (e.g. "http://repo.archlinux.fr/$arch")
@@ -296,20 +296,21 @@ Lets you install packages from AUR. This will only work if you have
 `base-devel` package group (required to build packages from AUR) and will
 install `package-query` and `yaourt` packages via https://aur.sh webservice.
 Otherwise you have to include `pacman::yaourt` class manually.
-
-    class { 'pacman':
-      enable_aur => true,
-    }
+```puppet
+class { 'pacman':
+  enable_aur => true,
+}
+```
 You can then install specific packages from AUR:
-
-    pacman::aur { 'gitlab': }
-
+```puppet
+pacman::aur { 'gitlab': }
+```
 If you later decide you need to remove the package:
-
-    pacman::aur { 'gitlab':
-        ensure => 'absent'
-    }
-
+```puppet
+pacman::aur { 'gitlab':
+    ensure => 'absent'
+}
+```
 #### Parameters
 
 *   [*ensure*]          - specify if package should be present or absent
